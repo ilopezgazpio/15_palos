@@ -1,6 +1,8 @@
 # 15_palos
 El juego de los quince palos. Propuesta de IA para competir con Don Rogelio.
 
+El sistema de IA está basado en aprendizaje por refuerzo, en el que el sistema no conoce ninguna regla específica del juego más allá de que no puede realizar movimientos ilegales. Aprende jugando contra sí mismo.
+
 ## Requisitos
 
 - python 3.6
