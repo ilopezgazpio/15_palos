@@ -81,13 +81,11 @@ class Agent:
     def update(self, reward):
 
         #print("Player: {}, state: {} , reward: {}".format(self.player, self.state_history, reward))
-        #input("")
 
         # BACKTRACK over the states when episode terminates
-        future = reward
-
         for current in reversed(self.state_history):
-            value = self.V[current] + self.alpha * (future - self.V[current])
-            self.V[current] = value
-            future = value
+            # Save reward value for next iteration
+            reward = self.V[current] + self.alpha * (reward - self.V[current])
+            self.V[current] = reward
+
         self.reset_history()
