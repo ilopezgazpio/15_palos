@@ -18,6 +18,9 @@ class Agent:
     def setV(self, V):
         self.V = V
 
+    def setE(self, e):
+        self.eps = e
+
     def set_player1(self):
         self.player = 1
 
