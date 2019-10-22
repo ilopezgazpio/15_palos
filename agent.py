@@ -18,8 +18,12 @@ class Agent:
     def setV(self, V):
         self.V = V
 
-    def setE(self, e):
+    def setEpsilon(self, e):
         self.eps = e
+
+    def decayEpsilon(self, ratio, iterations):
+        self.setEpsilon(self.eps - (self.eps / iterations * ratio))
+        print(self.eps)
 
     def set_player1(self):
         self.player = 1
