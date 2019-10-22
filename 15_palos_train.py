@@ -6,11 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 import sys
-import os.path
 
 
 '''
-Test game
+Train agent
 '''
 
 if __name__ == '__main__':
@@ -20,31 +19,57 @@ if __name__ == '__main__':
     parser.add_argument('--alpha', type=float, default=0.05, help='Learning rate value, for the update of state values')
     parser.add_argument('--epsilon', type=float, default=0.15, help='Exploration vs explotation ratio')
     parser.add_argument('--epsilon_decay', type=float, default=1, help='Epsilon decay ratio')
+    parser.add_argument('--saveAgentState', default=False, action='store_true', help='Save trained agent V(s) values')
     parser.add_argument('--path', type=str, default="agentVS.txt", help='Path to save/load agent state')
-    args = parser.parse_args()
 
-    if not os.path.exists(args.path):
-        print("File with V(s) values of agent does not exist. First run training script")
-        sys.exit(-1)
+    args = parser.parse_args()
 
     env = Environment()
 
-    aiPlayer = Agent(args.epsilon, args.alpha)
-    aiPlayer.loadAgentValues(args.path)
-    aiPlayer.eps = 0
-    aiPlayer.set_verbose(True)
+    player1 = Agent(args.epsilon, args.alpha)
+    player1.set_player1()
+    player1.setV(env.initial_values())
+
+    player2 = Agent(args.epsilon, args.alpha)
+    player2.set_player2()
+    player2.setV(env.initial_values())
+
+    players = [player1, player2]
+
+    print("=================")
+    print("Starting training")
+    print("=================")
+    for e in range(args.episodes):
+        if e % 5000 == 0:
+            print(e)
+        order = np.random.permutation( range(len(players)) )
+        env.play_game( players[order[0]], players[order[1]] )
+        [player.decayEpsilon(args.epsilon_decay, args.episodes) for player in players]
+
+    print("============")
+    print("End training")
+    print("============")
 
     human = Human()
     rounds = 0
+
+    if args.saveAgentState:
+        player1.saveAgentValues(args.path)
 
     while True:
         print("Starting round {}".format(rounds))
 
         if rounds % 2 == 0:
+            aiPlayer = player1
+            aiPlayer.set_verbose(True)
+            aiPlayer.eps = 0
             aiPlayer.set_player1()
             human.set_player2()
             env.play_game(aiPlayer, human, draw=2)
         else:
+            aiPlayer = player2
+            aiPlayer.set_verbose(True)
+            aiPlayer.eps = 0
             aiPlayer.set_player2()
             human.set_player1()
             env.play_game(human, aiPlayer, draw=1)
