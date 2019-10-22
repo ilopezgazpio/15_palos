@@ -18,12 +18,17 @@ class Agent:
     def setV(self, V):
         self.V = V
 
+    def saveAgentValues(self, path):
+        np.savetxt(path, self.V, delimiter="\n", fmt="%s")
+
+    def loadAgentValues(self, path):
+        self.V = np.loadtxt(path,delimiter="\n")
+
     def setEpsilon(self, e):
         self.eps = e
 
     def decayEpsilon(self, ratio, iterations):
         self.setEpsilon(self.eps - (self.eps / iterations * ratio))
-        print(self.eps)
 
     def set_player1(self):
         self.player = 1
