@@ -15,9 +15,11 @@ Train and play game
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Generate data.')
-    parser.add_argument('--episodes', type=int, default=30000, help='Number of episodes to train the model')
-    parser.add_argument('--alpha', type=float, default=0.05, help='Number of episodes to train the model')
-    parser.add_argument('--epsilon', type=float, default=0.15, help='Number of episodes to train the model')
+    parser.add_argument('--episodes', type=int, default=50000, help='Number of episodes to train the model')
+    parser.add_argument('--alpha', type=float, default=0.05, help='Learning rate value, for the update of state values')
+    parser.add_argument('--epsilon', type=float, default=0.15, help='Exploration vs explotation ratio')
+    parser.add_argument('--epsilon_decay', type=float, default=1, help='Epsilon decay ratio')
+
     args = parser.parse_args()
 
     env = Environment()
@@ -40,6 +42,7 @@ if __name__ == '__main__':
             print(e)
         order = np.random.permutation( range(len(players)) )
         env.play_game( players[order[0]], players[order[1]] )
+        [player.decayEpsilon(args.epsilon_decay, args.episodes) for player in players]
 
     print("============")
     print("End training")
