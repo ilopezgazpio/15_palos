@@ -13,7 +13,7 @@ class Human:
     def take_action(self, env):
         while True:
             move = ""
-            if sys.version_info[0] > 3:
+            if sys.version_info[0] >= 3:
                 move = input("\nEnter level [0, 1, 2] and number of pieces to take from board separated by space (e.g. 0 3): ")
             else:
                 move = raw_input("\nEnter level [0, 1, 2] and number of pieces to take from board separated by space (e.g. 0 3): ")

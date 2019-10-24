@@ -1,6 +1,6 @@
-from environment import Environment
-from human_agent import Human
-from agent import Agent
+from Environment import Environment
+from Human_Agent import Human
+from Agent import Agent
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -81,7 +81,7 @@ if __name__ == '__main__':
 
         rounds += 1
 
-        if sys.version_info[0] > 3:
+        if sys.version_info[0] >= 3:
             answer = input("Play again? [Y/n]: ")
         else:
             answer = raw_input("Play again? [Y/n]: ")
