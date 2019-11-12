@@ -19,7 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('--alpha', type=float, default=0.05, help='Learning rate value, for the update of state values')
     parser.add_argument('--epsilon', type=float, default=0.15, help='Exploration vs explotation ratio')
     parser.add_argument('--epsilon_decay', type=float, default=1, help='Epsilon decay ratio')
-    parser.add_argument('--saveAgentState', default=False, action='store_true', help='Save trained agent V(s) values')
+    parser.add_argument('--saveAgentState', default=True, action='store_true', help='Save trained agent V(s) values')
     parser.add_argument('--path', type=str, default="agentVS.txt", help='Path to save/load agent state')
 
     args = parser.parse_args()
