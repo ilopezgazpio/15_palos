@@ -1,3 +1,7 @@
+from Director import Director
+from Scene import Scene
+from DummyScene import DummyScene
+
 from Environment import Environment
 from Human_Agent import Human
 from Agent import Agent
@@ -15,18 +19,20 @@ Test game
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Generate data.')
-    parser.add_argument('--episodes', type=int, default=50000, help='Number of episodes to train the model')
+    # todo -> resolution should be an argument
+    parser = argparse.ArgumentParser(description='Play the 15 sticks game.')
     parser.add_argument('--alpha', type=float, default=0.05, help='Learning rate value, for the update of state values')
     parser.add_argument('--epsilon', type=float, default=0.15, help='Exploration vs explotation ratio')
     parser.add_argument('--epsilon_decay', type=float, default=1, help='Epsilon decay ratio')
     parser.add_argument('--path', type=str, default="agentVS.txt", help='Path to save/load agent state')
     args = parser.parse_args()
 
-    if not os.path.exists(args.path):
-        print("File with V(s) values of agent does not exist. First run training script")
-        sys.exit(-1)
+    director = Director()
+    director.select_scene('GameScene', args)
+    director.project_scene('GameScene')
 
+
+    '''
     env = Environment()
 
     aiPlayer = Agent(args.epsilon, args.alpha)
@@ -63,4 +69,4 @@ if __name__ == '__main__':
 
         if answer and answer.lower()[0] == 'n':
             break
-
+    '''
