@@ -3,6 +3,9 @@ from Point import Point
 from Stick import Stick
 from Sticks import Sticks
 from Scene import Scene
+from Environment import Environment
+from Agent import Agent
+from Human_Agent import Human
 import os
 
 class GameScene(Scene):
@@ -12,6 +15,28 @@ class GameScene(Scene):
         Scene.__init__(self, args)
 
         ''' define local objects and sprites '''
+
+        # Initialize environment
+        self.env = Environment()
+        self.env.reset()
+
+        # Game turn variables
+        self.drawPlayer = None
+        self.currentPlayer = None
+
+        # Initialize AI player
+        self.aiPlayer = Agent(self.args.epsilon, self.args.alpha)
+        self.aiPlayer.loadAgentValues(self.args.path)
+        self.aiPlayer.eps = 0
+        self.aiPlayer.set_verbose(True)
+
+        # Initialize Human player
+        self.human = Human()
+
+        # TODO Initialize rounds
+        self.initialized = False
+        self.rounds = 0
+        # print("Starting round {}".format(rounds))
 
         # Read agent Vs files
         if not os.path.exists(args.path):
@@ -39,12 +64,70 @@ class GameScene(Scene):
                     stick_clicked[0].clicked()
 
             if event.type ==pygame.KEYDOWN and event.key==pygame.K_RETURN:
-                self.sticks.removeSelected()
+                # TODO - ILLEGAL MOVEMENT CONTROL
+                level, number = self.sticks.removeSelected()
+                move = (int(level), int(number))
+                self.env.make_move(move)
+
+                # Debug
+                print("Level: {0} , Number: {1}".format(level, number))
+                print("==============")
+                print("Human Movement")
+                print("==============")
+                self.env.draw_board()
+
+                # Give turn
+                self.currentPlayer = self.aiPlayer
 
 
     def update(self):
-        '''Collitions'''
-        pass
+        '''Game iteration'''
+
+        # Set starting player for the whole round
+        if not self.initialized and self.rounds % 2 == 0:
+            self.aiPlayer.set_player1()
+            self.human.set_player2()
+            # self.env.play_game(aiPlayer, human, draw=2), for pygame we need to decompose this call
+            self.initialized = True
+            self.currentPlayer = self.human
+            self.drawPlayer = 2
+
+        elif not self.initialized and self.rounds %2 != 0:
+            self.aiPlayer.set_player2()
+            self.human.set_player1()
+            # self.env.play_game(human, aiPlayer, draw=1), for pygame we need to decompose this call
+            self.initialized = True
+            self.currentPlayer = self.aiPlayer
+            self.darwPlayer = 1
+
+        # Game turn
+
+        # 1 - Draw board if debug is necessary
+        #self.env.draw_board()
+
+        # 2 - if AI agent turn -> then take action
+        if self.currentPlayer == self.aiPlayer:
+
+            # ai_move is always a valid move
+            ai_move = self.currentPlayer.take_action(self.env)
+            self.sticks.removeMovement(ai_move)
+
+            # 3 - Update environment state
+            env_state = self.env.get_state()
+
+            # 4 - Update state history
+            self.currentPlayer.update_state_history(env_state)
+
+            # 5 - Give turn
+            self.currentPlayer = self.human
+
+        self.sticks.update()
+
+
+
+
+
+
 
     def draw(self, screen):
         '''Fill screen background'''
