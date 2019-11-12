@@ -43,4 +43,23 @@ class Stick(pygame.sprite.Sprite):
     def isSelected(self):
         return self.image_icon == 'resources/stick_selected.png'
 
+    def removeAI(self):
+        self.image_icon = 'resources/stick_remove.png'
+        self.__load_image()
+        self.delete = True
+
+    def update(self):
+
+        # Delete the sprite
+        # TODO: Improve animation, why is alpha not working with image.set_alpha() ??????
+        if self.delete:
+            self.alpha += 10
+            self.image.set_alpha(self.alpha)
+
+        if self.alpha > 1000:
+            self.kill()
+
+
+
+
 
