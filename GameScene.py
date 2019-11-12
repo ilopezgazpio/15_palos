@@ -79,7 +79,6 @@ class GameScene(Scene):
                 # Give turn
                 self.currentPlayer = self.aiPlayer
 
-
     def update(self):
         '''Game iteration'''
 
@@ -123,12 +122,6 @@ class GameScene(Scene):
 
         self.sticks.update()
 
-
-
-
-
-
-
     def draw(self, screen):
         '''Fill screen background'''
         dimension = screen.get_size()
@@ -138,4 +131,31 @@ class GameScene(Scene):
         '''Draw sticks'''
         self.sticks.draw(screen)
 
+# TODO - changes that have not been integrated below
 
+'''      
+HANDLE GAME ENDS -> EVENT -> CHECK NUMBER OF STICK IN GAME IS 0
+================================================================
+if env.winner == aiPlayer.player:
+print("\n Game Over \n")
+elif env.winner == human.player:
+print("\n Victory \n")
+
+rounds += 1
+
+if sys.version_info[0] >= 3:
+answer = input("Play again? [Y/n]: ")
+else:
+answer = raw_input("Play again? [Y/n]: ")
+
+if answer and answer.lower()[0] == 'n':
+break
+
+def play_game(self, p1, p2, draw=False):             
+
+while not self.game_over():         
+
+p1.update(self.reward(p1.player))
+
+p2.update(self.reward(p2.player))
+'''
