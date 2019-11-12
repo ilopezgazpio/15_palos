@@ -25,4 +25,6 @@ class Sticks(pygame.sprite.Group):
     def removeSelected(self):
         for stick in self.sprites():
             if stick.isSelected():
-                stick.kill()
+                #stick.kill()
+                self.remove(stick)
+
