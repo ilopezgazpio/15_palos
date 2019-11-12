@@ -1,13 +1,18 @@
 import pygame
+import time
 
 class Stick(pygame.sprite.Sprite):
 
-    def __init__(self, location):
+    def __init__(self, location, line):
         pygame.sprite.Sprite.__init__(self)
 
         self.image_icon = 'resources/stick.png'
         self.x = location[0]
         self.y = location[1]
+        # Line in which the stick is located line 0 -> 3 , line 1 -> 5 , line 2 -> 7
+        self.line = line
+        self.delete = False
+        self.alpha = 0
 
         self.__load_image()
 
