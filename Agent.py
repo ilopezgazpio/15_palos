@@ -70,22 +70,25 @@ class Agent:
                     best_state = state
                     next_move = m
 
-            if self.verbose:
-                env.draw_board()
+            print("===========================================")
+            print("IA Movement")
+            print("{}, value {}".format(next_move, move2value[next_move]))
+            print("============================================")
 
-                print("===========")
-                print("IA Movement")
-                print("{}, value {}".format(next_move, move2value[next_move]))
-                print("===========")
-                '''
-                for m in move2value.keys():                    
-                    if m != next_move:
-                        print("Movement {}, value {}".format(m, move2value[m]))
-                    else:
-                        print("Best movement {}, value {}".format(m, move2value[m]))
-                '''
+            '''
+            for m in move2value.keys():                    
+                if m != next_move:
+                    print("Movement {}, value {}".format(m, move2value[m]))
+                else:
+                    print("Best movement {}, value {}".format(m, move2value[m]))
+            '''
 
         env.make_move(next_move)
+
+        if self.verbose:
+            env.draw_board()
+
+        return next_move
 
     def update_state_history(self, s):
         self.state_history.append(s)
