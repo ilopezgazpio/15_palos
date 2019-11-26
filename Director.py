@@ -6,6 +6,7 @@ import time
 from DummyScene import DummyScene
 from GameScene import GameScene
 from VSFileNotFoundScene import VSFileNotFoundScene
+from GameOverScene import GameOverScene
 
 class Director():
 
@@ -60,7 +61,7 @@ class Director():
             pygame.display.flip()
 
         # closing game
-        time.sleep(2)
+        time.sleep(1)
         pygame.quit()
         sys.exit(0)
 
