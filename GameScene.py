@@ -6,6 +6,7 @@ from Scene import Scene
 from Environment import Environment
 from Agent import Agent
 from Human_Agent import Human
+import time
 import os
 
 class GameScene(Scene):
@@ -18,7 +19,6 @@ class GameScene(Scene):
 
         # Initialize environment
         self.env = Environment()
-        self.env.reset()
 
         # Game turn variables
         self.drawPlayer = None
@@ -33,9 +33,14 @@ class GameScene(Scene):
         # Initialize Human player
         self.human = Human()
 
-        # TODO Initialize rounds
-        self.initialized = False
-        self.rounds = 0
+        # TODO Initialize rounds - Implemented in generic resetGameScene
+        # self.env.reset()
+        #self.initialized = False
+        self.rounds = -1
+        ''' Create objects of game'''
+        # todo -> scene knows about args -> get args.resolution
+        #self.sticks = Sticks()
+        self.resetGameScene()
         # print("Starting round {}".format(rounds))
 
         # Read agent Vs files
@@ -47,11 +52,8 @@ class GameScene(Scene):
         ''' define background '''
         self.background_image = pygame.image.load("resources/fieltro.jpg").convert()
 
-        ''' Create objects of game'''
-        # todo -> scene knows about args -> get args.resolution
-        self.sticks = Sticks()
-
     def handle_events(self, events):
+
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 mouse_sprite = Point(pygame.mouse.get_pos())
@@ -63,7 +65,7 @@ class GameScene(Scene):
                 if stick_clicked:
                     stick_clicked[0].clicked()
 
-            if event.type ==pygame.KEYDOWN and event.key==pygame.K_RETURN:
+            if event.type == pygame.KEYDOWN and event.key==pygame.K_RETURN:
                 # TODO - ILLEGAL MOVEMENT CONTROL
                 level, number = self.sticks.removeSelected()
                 move = (int(level), int(number))
@@ -81,6 +83,15 @@ class GameScene(Scene):
 
     def update(self):
         '''Game iteration'''
+        if len(self.sticks) == 1:
+            time.sleep(2)
+            print("=========")
+            print("Game Over")
+            print("=========")
+            self.resetGameScene()
+            self.next_scene = 'GameOverScene'
+        else:
+            self.next_scene = None
 
         # Set starting player for the whole round
         if not self.initialized and self.rounds % 2 == 0:
@@ -131,31 +142,31 @@ class GameScene(Scene):
         '''Draw sticks'''
         self.sticks.draw(screen)
 
+    def game_over(self):
+        message = ""
+        return self.env.game_over()
+
+
+    def resetGameScene(self):
+        self.next_scene = None
+        self.sticks = Sticks()
+        self.env.reset()
+        self.rounds += 1
+        self.initialized = False
+
 # TODO - changes that have not been integrated below
 
 '''      
-HANDLE GAME ENDS -> EVENT -> CHECK NUMBER OF STICK IN GAME IS 0
-================================================================
 if env.winner == aiPlayer.player:
 print("\n Game Over \n")
 elif env.winner == human.player:
 print("\n Victory \n")
 
-rounds += 1
 
-if sys.version_info[0] >= 3:
 answer = input("Play again? [Y/n]: ")
 else:
 answer = raw_input("Play again? [Y/n]: ")
 
 if answer and answer.lower()[0] == 'n':
-break
-
-def play_game(self, p1, p2, draw=False):             
-
-while not self.game_over():         
-
-p1.update(self.reward(p1.player))
-
-p2.update(self.reward(p2.player))
+break        
 '''
