@@ -107,7 +107,7 @@ class Environment:
             return False
 
         # Game Over -> current player is the looser
-        self.winner = self.current.player
+        #self.winner = self.current.player
         self.ended = True
         return True
 
