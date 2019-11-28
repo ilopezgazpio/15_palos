@@ -50,42 +50,6 @@ if __name__ == '__main__':
     print("End training")
     print("============")
 
-    human = Human()
-    rounds = 0
-
     if args.saveAgentState:
         player1.saveAgentValues(args.path)
-
-    while True:
-        print("Starting round {}".format(rounds))
-
-        if rounds % 2 == 0:
-            aiPlayer = player1
-            aiPlayer.set_verbose(True)
-            aiPlayer.eps = 0
-            aiPlayer.set_player1()
-            human.set_player2()
-            env.play_game(aiPlayer, human, draw=2)
-        else:
-            aiPlayer = player2
-            aiPlayer.set_verbose(True)
-            aiPlayer.eps = 0
-            aiPlayer.set_player2()
-            human.set_player1()
-            env.play_game(human, aiPlayer, draw=1)
-
-        if env.winner == aiPlayer.player:
-            print("\n Game Over \n")
-        elif env.winner == human.player:
-            print("\n Victory \n")
-
-        rounds += 1
-
-        if sys.version_info[0] >= 3:
-            answer = input("Play again? [Y/n]: ")
-        else:
-            answer = raw_input("Play again? [Y/n]: ")
-
-        if answer and answer.lower()[0] == 'n':
-            break
-
+    
