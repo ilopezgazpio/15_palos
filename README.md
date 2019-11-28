@@ -23,5 +23,7 @@ Para jugar contra el modelo entrenado
 ## Notas de juego
 Seleccionar los palos a retirar con el mouse y presionar la tecla enter. Al finalizar la partira presionar y / n para continuar o finalizar el juego, para cada nueva partida el jugador inicial va rotando.
 
+[Demo playing in twitter] (https://twitter.com/lgazpio/status/1194299484940963840)
+
 ## Versión alpha
 Si detectas cualquier bug comunícalo a inigo.lopezgazpio@deusto.es
