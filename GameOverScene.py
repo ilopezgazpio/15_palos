@@ -23,6 +23,6 @@ class GameOverScene(Scene):
     def draw(self, screen):
         screen.fill(utils.BLACK)
         dimension = screen.get_size()
-        (surface, rectangle) = utils.get_surfrect_text('Play again ?', 'arial', 55, utils.RED, dimension[0] / 2, dimension[1] / 2)
+        (surface, rectangle) = utils.get_surfrect_text('Play again ? (y/n)', 'arial', 55, utils.RED, dimension[0] / 2, dimension[1] / 2)
         screen.blit(surface, rectangle)
         #self.showing = False
