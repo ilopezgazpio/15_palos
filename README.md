@@ -20,5 +20,8 @@ Para jugar contra el modelo entrenado
 
 ```python2.7 15_palos.py```
 
+## Notas de juego
+Seleccionar los palos a retirar con el mouse y presionar la tecla enter. Al finalizar la partira presionar y / n para continuar o finalizar el juego, para cada nueva partida el jugador inicial va rotando.
+
 ## Versión alpha
-Si detectas cualquier bug comunícalo a inigo.lopezgazpio@deusto.es  
+Si detectas cualquier bug comunícalo a inigo.lopezgazpio@deusto.es
