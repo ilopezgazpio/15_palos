@@ -34,6 +34,20 @@ class Sticks(pygame.sprite.Group):
         return (line,number)
 
 
+    def countSelected(self):
+
+        sticks_selected = [stick for stick in self.sprites() if stick.isSelected()]
+
+        if sticks_selected:
+            number = len(sticks_selected)
+            line = sticks_selected[0].line
+            return (line,number)
+        else:
+            return (0,0)
+        
+
+    
+
     def removeMovement(self, tuple_xy):
         line, number = tuple_xy
         sticks_in_line = [stick for stick in self.sprites() if stick.line == line]

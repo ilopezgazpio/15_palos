@@ -64,6 +64,15 @@ class GameScene(Scene):
                 #    stick.printRect()
                 if stick_clicked:
                     stick_clicked[0].clicked()
+                    level, number = self.sticks.countSelected()
+                    move = (int(level), int(number))
+                    self.env.make_move(move)
+                    print("===========================================")
+                    print("Human Movement")
+                    print("{}, value {}".format(move, self.aiPlayer.V[self.env.get_state()]))
+                    print("============================================")
+                    self.env.unmake_move(move)
+
 
             if event.type == pygame.KEYDOWN and event.key==pygame.K_RETURN:
                 # TODO - ILLEGAL MOVEMENT CONTROL

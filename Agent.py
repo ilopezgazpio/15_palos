@@ -54,6 +54,7 @@ class Agent:
             possible_moves = env.possible_moves()
             idx = np.random.choice(len(possible_moves))
             next_move = possible_moves[idx]
+
         else:
             # choose the best action based on current values of states V(s)
             move2value = {}  # for debugging
