@@ -5,20 +5,25 @@ El sistema de IA está basado en aprendizaje por refuerzo, en el que el sistema 
 
 ## Requisitos
 
-- python 2.7
+- python
 - numpy
 - pygame
 - LibSDL dev (ttf, image, ...)
 
 ## Ejecución
 
+El sistema se puede poner en marcha a traves de conda
+```
+conda env create -f 15palos.yml
+```
+
 Para entrenar el modelo ejecutar en una terminal
  
-```python2.7 15_palos_train.py```
+```python 15_palos_train.py```
 
 Para jugar contra el modelo entrenado
 
-```python2.7 15_palos.py```
+```python 15_palos.py```
 
 ## Notas de juego
 Seleccionar los palos a retirar con el mouse y presionar la tecla enter. Al finalizar la partira presionar y / n para continuar o finalizar el juego, para cada nueva partida el jugador inicial va rotando.
