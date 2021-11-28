@@ -50,7 +50,7 @@ class GameScene(Scene):
             self.next_scene = 'VSFileNotFoundScene'
 
         ''' define background '''
-        self.background_image = pygame.image.load("resources/fieltro.jpg").convert()
+        self.background_image = pygame.image.load("resources/BMP/fieltro.bmp").convert()
 
     def handle_events(self, events):
 
@@ -154,19 +154,3 @@ class GameScene(Scene):
         self.rounds += 1
         self.initialized = False
 
-# TODO - changes that have not been integrated below
-
-'''      
-if env.winner == aiPlayer.player:
-print("\n Game Over \n")
-elif env.winner == human.player:
-print("\n Victory \n")
-
-
-answer = input("Play again? [Y/n]: ")
-else:
-answer = raw_input("Play again? [Y/n]: ")
-
-if answer and answer.lower()[0] == 'n':
-break        
-'''

@@ -2,7 +2,7 @@ import pygame
 import sys
 import time
 
-# important to add scenes so they can be accesed through globals
+# important to add scenes so they can be accessed through globals
 from DummyScene import DummyScene
 from GameScene import GameScene
 from VSFileNotFoundScene import VSFileNotFoundScene

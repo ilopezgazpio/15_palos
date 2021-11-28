@@ -6,7 +6,7 @@ class Stick(pygame.sprite.Sprite):
     def __init__(self, location, line):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image_icon = 'resources/stick.png'
+        self.image_icon = 'resources/BMP/stick.bmp'
         self.x = location[0]
         self.y = location[1]
         # Line in which the stick is located line 0 -> 3 , line 1 -> 5 , line 2 -> 7
@@ -18,7 +18,7 @@ class Stick(pygame.sprite.Sprite):
 
     def __load_image(self):
         # load image
-        self.image = pygame.image.load(self.image_icon)
+        self.image = pygame.image.load(self.image_icon).convert()
 
         # set rectangle
         self.rect = self.image.get_rect()
@@ -28,10 +28,10 @@ class Stick(pygame.sprite.Sprite):
 
     def clicked(self):
         if not self.isSelected():
-            self.image_icon = 'resources/stick_selected.png'
+            self.image_icon = 'resources/BMP/stick_selected.bmp'
             self.__load_image()
         else:
-            self.image_icon = 'resources/stick.png'
+            self.image_icon = 'resources/BMP/stick.bmp'
             self.__load_image()
 
     def printCoord(self):
@@ -41,10 +41,10 @@ class Stick(pygame.sprite.Sprite):
         print("From ({},{}) , to ({},{})".format(self.x, self.y, self.x + self.rect.width, self.y + self.rect.width))
 
     def isSelected(self):
-        return self.image_icon == 'resources/stick_selected.png'
+        return self.image_icon == 'resources/BMP/stick_selected.bmp'
 
     def removeAI(self):
-        self.image_icon = 'resources/stick_remove.png'
+        self.image_icon = 'resources/BMP/stick_remove.bmp'
         self.__load_image()
         self.delete = True
 
